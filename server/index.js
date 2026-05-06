@@ -3,6 +3,7 @@ import express from "express";
 
 import roomsRouter from "./routes/rooms.js";
 import invoiceRouter from "./routes/invoice.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,8 @@ app.get("/api/health", (request, response) => {
 app.use("/api/rooms", roomsRouter);
 
 app.use("/api/invoice", invoiceRouter);
+
+app.use(errorHandler);
 
 // Start server
 const _server = app.listen(PORT, HOST, () => {

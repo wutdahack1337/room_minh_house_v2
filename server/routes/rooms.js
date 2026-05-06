@@ -5,7 +5,7 @@ import { validate, schemas } from "../middleware/validate.js";
 const router = Router();
 
 // Create room
-router.post("/", validate(schemas.createRoom), (request, response) => {
+router.post("/", validate(schemas.createRoom), (request, response, next) => {
   const { name } = request.body;
 
   try {
@@ -13,21 +13,16 @@ router.post("/", validate(schemas.createRoom), (request, response) => {
     const created = sqliteDatabase.prepare("SELECT id, name FROM rooms WHERE id = ?").get(result.lastInsertRowid);
     response.status(201).json(created);
   } catch (error) {
-    console.error("[create room api]", error);
-    if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
-      return response.status(409).json({ error: "duplicate room name" });
-    }
-    response.status(500).json({ error: "internal server error" });
+    next(error);
   }
 });
 
 // Get all rooms
-router.get("/", (request, response) => {
+router.get("/", (request, response, next) => {
   try {
     response.json(sqliteDatabase.prepare("SELECT id, name FROM rooms").all());
   } catch (error) {
-    console.error("[get rooms api]", error);
-    response.status(500).json({ error: "internal server error" });
+    next(error);
   }
 });
 
