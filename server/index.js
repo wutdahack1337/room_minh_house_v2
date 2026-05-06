@@ -1,7 +1,7 @@
 import express from "express";
 
 const app = express();
-const HOST = "0.0.0.0";
+const HOST = "localhost";
 const PORT = 3001;
 
 // API
@@ -14,6 +14,6 @@ app.get("/api/health", (request, response) => {
 
 // Start server
 const server = app.listen(PORT, HOST, () => {
-    console.log(`Backend server is running at http://localhost:${PORT}`);
-    console.log(`API endpoints is available at http://localhost:${PORT}/api`);
+    console.log(`Backend server is running at http://${HOST}:${PORT}`);
+    console.log(`API endpoints are available at http://${HOST}:${PORT}/api`);
 });
