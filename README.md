@@ -14,32 +14,40 @@
 
 ```bash
 npm install
+cp .env.example .env
 npm run server
 ```
 
 ## API Endpoints
 
 ### Health Check
+
 - `GET /api/health` — Health check
+
 ```bash
 curl http://localhost:3001/api/health
 ```
 
 ### Rooms
-- `GET /api/rooms` — Get all rooms
-```bash
-curl http://localhost:3001/api/rooms
-```
 
 - `POST /api/rooms` — Create a new room
+
 ```bash
 curl -X POST http://localhost:3001/api/rooms \
   -H "Content-Type: application/json" \
   -d '{"name":"Room 101"}'
 ```
 
+- `GET /api/rooms` — Get all rooms
+
+```bash
+curl http://localhost:3001/api/rooms
+```
+
 ### Invoice
+
 - `POST /api/invoice` — Generate an invoice for a room
+
 ```bash
 curl -X POST http://localhost:3001/api/invoice \
   -H "Content-Type: application/json" \
@@ -47,6 +55,7 @@ curl -X POST http://localhost:3001/api/invoice \
 ```
 
 ## SQLite3 commands
+
 ```
 sqlite3 server/database.db
 .tables

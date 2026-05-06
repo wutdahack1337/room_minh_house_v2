@@ -1,27 +1,27 @@
 import { Router } from "express";
-
+import sqliteDatabase from "../database.js";
+import { validate, schemas } from "../middleware/validate.js";
 
 const router = Router();
 
-
 // Generate invoice
-router.post("/", (request, response) => {
-    let { roomId, roomRent, electricityConsumption, electricityPrice, waterConsumption, waterPrice } = request.body;
-    if (!roomId || electricityConsumption == null || waterConsumption == null || electricityPrice == null || waterPrice == null || roomRent == null) {
-        return response.status(400).json({ error: "missing some required fields" });
-    }
+router.post("/", validate(schemas.createInvoice), (request, response, next) => {
+  const { roomId, roomRent, electricityConsumption, electricityPrice, waterConsumption, waterPrice } = request.body;
 
-    roomRent = Number(roomRent);
-    electricityConsumption = Number(electricityConsumption);
-    waterConsumption = Number(waterConsumption);
-    electricityPrice = Number(electricityPrice);
-    waterPrice = Number(waterPrice);
+  try {
+    const room = sqliteDatabase.prepare("SELECT id FROM rooms WHERE id = ?").get(roomId);
+    if (!room) {
+      return response.status(404).json({ error: "room not exists" });
+    }
 
     const electricityBill = electricityConsumption * electricityPrice;
     const waterBill = waterConsumption * waterPrice;
     const totalBill = electricityBill + waterBill + roomRent;
 
-    response.status(200).json({ roomId, roomRent, electricityBill, waterBill, totalBill });
+    response.json({ roomId, roomRent, electricityBill, waterBill, totalBill });
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;
