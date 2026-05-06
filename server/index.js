@@ -1,6 +1,7 @@
 import express from "express";
 
 import roomsRouter from "./routes/rooms.js";
+import invoiceRouter from "./routes/invoice.js";
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,8 @@ app.get("/api/health", (request, response) => {
 });
 
 app.use("/api/rooms", roomsRouter);
+
+app.use("/api/invoice", invoiceRouter);
 
 // Start server
 const server = app.listen(PORT, HOST, () => {
