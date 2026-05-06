@@ -1,14 +1,12 @@
 import { Router } from "express";
 import sqliteDatabase from "../database.js";
+import { validate, schemas } from "../middleware/validate.js";
 
 const router = Router();
 
 // Create room
-router.post("/", (request, response) => {
+router.post("/", validate(schemas.createRoom), (request, response) => {
   const { name } = request.body;
-  if (!name) {
-    return response.status(400).json({ error: "name is required" });
-  }
 
   try {
     const result = sqliteDatabase.prepare("INSERT INTO rooms (name) VALUES (?)").run(name);

@@ -14,7 +14,8 @@
     "better-sqlite3": "^12.9.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "eslint": "^9.39.4",
