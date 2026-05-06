@@ -1,6 +1,5 @@
 import express from "express";
 
-import sqliteDatabase from "./database.js";
 import roomsRouter from "./routes/rooms.js";
 
 const app = express();
