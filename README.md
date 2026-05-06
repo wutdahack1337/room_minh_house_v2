@@ -30,18 +30,18 @@ curl http://localhost:3001/api/health
 
 ### Rooms
 
-- `GET /api/rooms` — Get all rooms
-
-```bash
-curl http://localhost:3001/api/rooms
-```
-
 - `POST /api/rooms` — Create a new room
 
 ```bash
 curl -X POST http://localhost:3001/api/rooms \
   -H "Content-Type: application/json" \
   -d '{"name":"Room 101"}'
+```
+
+- `GET /api/rooms` — Get all rooms
+
+```bash
+curl http://localhost:3001/api/rooms
 ```
 
 ### Invoice
