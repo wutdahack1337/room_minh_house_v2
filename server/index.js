@@ -1,5 +1,7 @@
 import express from "express";
 
+import sqliteDatabase from "./database.js";
+
 const app = express();
 const HOST = "localhost";
 const PORT = 3001;

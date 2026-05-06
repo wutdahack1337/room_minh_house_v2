@@ -21,3 +21,12 @@ curl http://localhost:3001/api/health
 
 - **Backend entry point:** `server/index.js`
 - **Backend tool:** Express (`npm run server`)
+
+## SQLite3 commands
+```
+sqlite3 server/database.db
+.tables
+.schema rooms
+SELECT * FROM rooms;
+.quit
+```
