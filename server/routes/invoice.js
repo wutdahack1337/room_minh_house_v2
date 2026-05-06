@@ -11,7 +11,7 @@ router.post("/", validate(schemas.createInvoice), (request, response, next) => {
   try {
     const room = sqliteDatabase.prepare("SELECT id FROM rooms WHERE id = ?").get(roomId);
     if (!room) {
-      return response.status(404).json({ error: "room not found" });
+      return response.status(404).json({ error: "room not exists" });
     }
 
     const electricityBill = electricityConsumption * electricityPrice;
