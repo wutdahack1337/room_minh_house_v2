@@ -1,0 +1,11 @@
+{
+  "name": "room_minh_house_v2",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "server": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
