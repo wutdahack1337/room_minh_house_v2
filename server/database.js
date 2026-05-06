@@ -11,10 +11,12 @@ sqliteDatabase.pragma("journal_mode = WAL");
 sqliteDatabase.pragma("foreign_keys = ON");
 console.log(`Database path: ${databasePath}`);
 
-
+// rooms
+sqliteDatabase.exec(`DROP TABLE IF EXISTS rooms;`);
 sqliteDatabase.exec(`
-    CREATE TABLE IF NOT EXISTS rooms (
-        id INTEGER PRIMARY KEY AUTOINCREMENT
+    CREATE TABLE rooms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL UNIQUE
     );
 `);
 

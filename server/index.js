@@ -1,8 +1,11 @@
 import express from "express";
 
 import sqliteDatabase from "./database.js";
+import roomsRouter from "./routes/rooms.js";
 
 const app = express();
+app.use(express.json());
+
 const HOST = "localhost";
 const PORT = 3001;
 
@@ -13,6 +16,8 @@ app.get("/api/health", (request, response) => {
         timestamp: new Date().toISOString(),
     });
 });
+
+app.use("/api/rooms", roomsRouter);
 
 // Start server
 const server = app.listen(PORT, HOST, () => {
