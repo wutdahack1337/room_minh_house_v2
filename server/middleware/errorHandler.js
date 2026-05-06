@@ -1,9 +1,9 @@
-export function errorHandler(error, request, respose, next) {
-  console.error(err);
+export function errorHandler(error, request, response, _next) {
+  console.error(error);
 
-  if (err.code === "SQLITE_CONSTRAINT_UNIQUE") {
-    return res.status(409).json({ error: "duplicate room name" });
+  if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+    return response.status(409).json({ error: "duplicate room name" });
   }
 
-  res.status(500).json({ error: "internal server error" });
+  response.status(500).json({ error: "internal server error" });
 }
